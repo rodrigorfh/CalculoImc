@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<title>
+	Calculo de IMC
+	</title>
+	<style>
+		.form-control{
+			margin-bottom: 5px;
+		}
+		.row-fluid{
+
+		}
+		h3{
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class ="row-fluid">
+			
+		<div class="col-md-4 col-md-offset-4">
+		    <div class="panel panel-default">
+		    	<div class="panel-heading"> 
+		    		<h1>Calculo IMC</h1>                               
+		        </div>
+		        <div class="panel-body">
+		     		<div class="col-xs-2">
+			        	<h3><small>Peso</small></h3>
+			        	<h3><small>Altura</small></h3>
+			        	
+			        </div>
+			        <div class="col-xs-8">
+			        	<input class="form-control" type="text" placeholder="Peso" id= "peso">
+			        	<input class="form-control" type="text" placeholder="Altura" id = "altura">
+			        	<h1 id = resultado></h1>
+			        	<div class= "col-xs-6">
+			        		<button type="button" class="btn btn-primary" onclick="calcular()">Calcular</button>
+			        	</div>
+			        	<div class= "col-xs-6">
+			        		<button type="button" class="btn btn-danger" onclick="limpar()">Limpar</button>
+			        	</div>
+			        </div>
+		        </div>
+		    </div>
+
+		</div>
+	
+		<script>
+			// peso / (altura * 2);
+			function calcular(){
+				var peso = parseInt(document.getElementById("peso").value);
+				var altura = parseFloat(document.getElementById("altura").value);
+				if(altura > 100){
+					altura = altura/100;
+				}
+				var imc = peso / (altura * 2);
+				document.getElementById("resultado").innerHTML = imc.toFixed(2);			
+			}
+			function limpar(){
+				document.getElementById("peso").value="";
+				document.getElementById("altura").value="";
+				document.getElementById("resultado").innerHTML = "";	
+			}
+
+		</script>
+	</div>
+</body>
+</html>
+
+
