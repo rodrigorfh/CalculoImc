@@ -4,42 +4,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<title>Calculo de IMC</title>
-	<style>
-		.form-control{
-			margin-bottom: 5px;
-		}
-		h3{
-			margin-top: 5px;
-		}
-		#resultado{
-			margin-left: -27px;
-			padding: 2px;
-		}
-		#alerta{
-			padding: 30px;
-    		/*margin-top: 21px;*/
-    		font-size:24pt;
-    		text-align: center;
-		}
-		#alertaIMC{
-			margin-top: 10px;
-			margin-bottom: 0px;
-		}
-		#painel-meio{
-			position:absolute;
-    		margin-top: 210px;
-		}
-		body{
-			background-color: rgb(237,237,237);
-			/*background-color: rgb(63,63,63);*/
-		}
-		img {
-			width: 100%;
-			height: 100%;
-			margin-left: 10px;
-			margin-top: -25px;
-		}
-	</style>
+	<script src="js/calculoMostrarImc.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/estiloCalculoimc.css">
 </head>
 <body>
 	<div class ="row-fluid">
@@ -60,6 +26,15 @@
 			        <div class="col-xs-8"> 
 			        	<input class="form-control" type="text" placeholder="Peso" id= "peso" autofocus="">
 			        	<input class="form-control" type="text" placeholder="Altura" id = "altura">
+
+			        	<div id="div-radio">
+			        		<label class="radio-inline">
+  								<input type="radio" name="genderOption" value="M"> M
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="genderOption"  value="F"> F
+							</label>
+			        	</div>
 			   			
 			        	<div class= "col-xs-6">
 			        		<button type="button" class="btn btn-primary" onclick="calcular()">Calcular</button>
@@ -77,66 +52,6 @@
 		        </div>
 		    </div>
 		</div>
-		
-		
-		<script>
-			// peso / (altura * 2);
-			function calcular(){
-				var peso = parseFloat((document.getElementById("peso").value).replace(",","."));
-				var altura = parseFloat((document.getElementById("altura").value).replace(",","."));
-
-				if(altura > 100){
-					altura = altura/100;
-				}
-
-				var imc = peso / (altura * 2);
-				if(imc < 100){
-					document.getElementById("resultado").innerHTML = imc.toFixed(2);
-				}else{
-					document.getElementById("resultado").innerHTML = '<img src=infinity.ico>';
-				}
-				detroyDiv();
-				criaDiv(imc);	
-			}
-
-			function limpar(){
-				document.getElementById("peso").value="";
-				document.getElementById("altura").value="";
-				document.getElementById("resultado").innerHTML = "";
-				document.getElementById("peso").focus();
-				detroyDiv();
-			}
-
-			function criaDiv(imc){
-				if(!imc) return;
-				var alerta = document.createElement('div');
-				alerta.id = 'alerta';
-				var textAlerta;
-				if(imc <18.5 || imc >= 25){
-					if(imc > 100){
-						alerta.className = 'alert alert-warning';
-						textAlerta = document.createTextNode("Ele calcula o IMC de um ser humano! Não da sua mãe.");
-
-					}else{
-						alerta.className = 'alert alert-danger';
-						textAlerta = document.createTextNode("MEU DEUS! Você vai morrer!.");
-					}
-				}else{
-					alerta.className = 'alert alert-info';
-					textAlerta = document.createTextNode("Parabens! Você é normal!");
-				}
-			
-				alerta.appendChild(textAlerta);
-				document.getElementById('alertaIMC').appendChild(alerta);	
-					
-
-			}
-			function detroyDiv(){
-				var element = document.getElementById("alerta");
-				if(element)element.parentNode.removeChild(element);
-			}
-
-		</script>
 	</div>
 </body>
 </html>
